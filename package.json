@@ -8,7 +8,8 @@
     "express": "^4.13.4",
     "express-handlebars": "^3.0.0",
     "mongoose": "^4.3.7",
-    "mongoose-auto-increment": "^5.0.1"
+    "mongoose-auto-increment": "^5.0.1",
+    "valid-url": "^1.0.9"
   },
   "devDependencies": {
     "babel-cli": "^6.4.5",
