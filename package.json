@@ -20,8 +20,9 @@
     "node": "5.5.0"
   },
   "scripts": {
-    "start": "node index.js",
-    "build": "./node_modules/.bin/babel --presets es2015,stage-0 src/ -d build -s"
+    "start": "node build/index.js",
+    "build": "./node_modules/.bin/babel --presets es2015,stage-0 src/ -d build -s",
+    "views": "test -d build/views || mkdir -p build/views &&  cp -a src/views/. build/views/"
   },
   "keywords": [],
   "author": "",

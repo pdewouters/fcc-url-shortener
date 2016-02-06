@@ -9,9 +9,9 @@ var UrlModel = require('./inc/url_model');
 
 app.set('port', process.env.PORT || 3000);
 
-app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
+app.engine('handlebars', exphbs({ layoutsDir: __dirname + "/views/layouts", defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
-
+app.set('views', __dirname + '/views')
 app.get('/', function (req, res) {
     var baseUrl = req.protocol + '://' + req.get('Host');
     res.render('home', { baseUrl: baseUrl });
