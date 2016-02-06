@@ -1,8 +1,8 @@
 {
-  "name": "timestamp-microservice",
+  "name": "fcc-url-shortener",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "build/index.js",
   "dependencies": {
     "dotenv": "^2.0.0",
     "express": "^4.13.4",
@@ -21,7 +21,7 @@
   },
   "scripts": {
     "start": "node index.js",
-    "build": "./node_modules/.bin/babel --presets es2015,stage-0 -d index.js"
+    "build": "./node_modules/.bin/babel --presets es2015,stage-0 src/ -d build -s"
   },
   "keywords": [],
   "author": "",
