@@ -1,17 +1,26 @@
 'use strict';
 
+var _expressHandlebars = require('express-handlebars');
+
+var _expressHandlebars2 = _interopRequireDefault(_expressHandlebars);
+
+var _url_model = require('./inc/url_model');
+
+var _url_model2 = _interopRequireDefault(_url_model);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 require('dotenv').config();
 var express = require('express');
 var app = express();
-var exphbs = require('express-handlebars');
+
 var validurl = require('valid-url');
-var UrlModel = require('./inc/url_model');
 
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || 5000);
 
-app.engine('handlebars', exphbs({ layoutsDir: __dirname + "/views/layouts", defaultLayout: 'main' }));
+app.engine('handlebars', (0, _expressHandlebars2.default)({ layoutsDir: __dirname + "/views/layouts/", defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
-app.set('views', __dirname + '/views')
+app.set('views', __dirname + '/views');
 app.get('/', function (req, res) {
     var baseUrl = req.protocol + '://' + req.get('Host');
     res.render('home', { baseUrl: baseUrl });
@@ -27,12 +36,12 @@ app.get('/new/*', function (req, res) {
         if (baseUrl.indexOf(req.params[0]) !== -1) {
             res.send(JSON.stringify({ error: 'you can\'t shorten a URL from this domain!' }));
         } else {
-            UrlModel.findOne({ original: req.params[0] }, function (err, url) {
+            _url_model2.default.findOne({ original: req.params[0] }, function (err, url) {
                 if (err) console.log(err);
                 if (url) {
                     res.send(JSON.stringify({ original: url.original, short: baseUrl + url.id }));
                 } else {
-                    var _url = new UrlModel({ original: req.params[0] });
+                    var _url = new _url_model2.default({ original: req.params[0] });
 
                     _url.save(function (err, url) {
                         if (err) return err;
@@ -48,7 +57,7 @@ app.get('/new/*', function (req, res) {
 
 // Redirect to original URL http://siteurl/4
 app.get('/:id(\\d+)', function (req, res) {
-    UrlModel.findById(req.params.id, function (err, url) {
+    _url_model2.default.findById(req.params.id, function (err, url) {
         if (err) console.log(err);
         if (url) {
             res.redirect(url.original);

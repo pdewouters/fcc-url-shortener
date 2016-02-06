@@ -11,4 +11,4 @@ const UrlSchema = new mongoose.Schema({
 })
 
 UrlSchema.plugin(autoIncrement.plugin, 'Url')
-module.exports = connection.model( 'Url', UrlSchema )
+export default connection.model( 'Url', UrlSchema )

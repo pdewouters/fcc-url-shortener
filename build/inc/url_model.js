@@ -1,5 +1,8 @@
 'use strict';
 
+Object.defineProperty(exports, "__esModule", {
+            value: true
+});
 var mongoose = require('mongoose');
 var connection = mongoose.createConnection('mongodb://' + process.env.MONGOLAB_USER + ':' + process.env.MONGOLAB_PASS + '@ds055925.mongolab.com:55925/fccdev');
 
@@ -12,5 +15,5 @@ var UrlSchema = new mongoose.Schema({
 });
 
 UrlSchema.plugin(autoIncrement.plugin, 'Url');
-module.exports = connection.model('Url', UrlSchema);
+exports.default = connection.model('Url', UrlSchema);
 //# sourceMappingURL=url_model.js.map

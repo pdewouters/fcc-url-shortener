@@ -2,15 +2,15 @@
 require('dotenv').config();
 const express = require('express')
 const app = express()
-const exphbs = require('express-handlebars')
+import exphbs from 'express-handlebars'
 const validurl = require('valid-url')
-const UrlModel = require('./inc/url_model')
+import UrlModel from './inc/url_model'
 
-app.set('port', (process.env.PORT || 3000))
+app.set('port', (process.env.PORT || 5000))
 
-app.engine('handlebars', exphbs({defaultLayout: 'main'}))
+app.engine('handlebars', exphbs({layoutsDir: __dirname + "/views/layouts/", defaultLayout: 'main'}))
 app.set('view engine', 'handlebars')
-
+app.set('views', __dirname + '/views')
 app.get('/', (req, res) => {
     const baseUrl = req.protocol + '://' + req.get('Host')
     res.render('home', {baseUrl: baseUrl})
