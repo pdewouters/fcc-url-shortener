@@ -1,9 +1,9 @@
 'use strict'
 require('dotenv').config();
-const express = require('express')
+import express from 'express'
 const app = express()
 import exphbs from 'express-handlebars'
-const validurl = require('valid-url')
+import validurl from 'valid-url'
 import UrlModel from './inc/url_model'
 
 app.set('port', (process.env.PORT || 5000))

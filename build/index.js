@@ -1,8 +1,16 @@
 'use strict';
 
+var _express = require('express');
+
+var _express2 = _interopRequireDefault(_express);
+
 var _expressHandlebars = require('express-handlebars');
 
 var _expressHandlebars2 = _interopRequireDefault(_expressHandlebars);
+
+var _validUrl = require('valid-url');
+
+var _validUrl2 = _interopRequireDefault(_validUrl);
 
 var _url_model = require('./inc/url_model');
 
@@ -11,10 +19,8 @@ var _url_model2 = _interopRequireDefault(_url_model);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 require('dotenv').config();
-var express = require('express');
-var app = express();
 
-var validurl = require('valid-url');
+var app = (0, _express2.default)();
 
 app.set('port', process.env.PORT || 5000);
 
@@ -31,7 +37,7 @@ app.get('/new/*', function (req, res) {
     res.header("Content-Type", "application/json");
     var baseUrl = req.protocol + '://' + req.get('Host') + '/';
 
-    if (validurl.isUri(req.params[0])) {
+    if (_validUrl2.default.isUri(req.params[0])) {
 
         if (baseUrl.indexOf(req.params[0]) !== -1) {
             res.send(JSON.stringify({ error: 'you can\'t shorten a URL from this domain!' }));
